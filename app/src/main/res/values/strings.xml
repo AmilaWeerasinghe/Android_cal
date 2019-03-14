@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="main_topic">Mystiko Calculator</string>
+    <string name="butn1txt">+</string>
+    <string name="butn2txt">-</string>
+    <string name="butn3txt">/</string>
+    <string name="butn4txt">*</string>
+    <string name="btnLastText">=</string>
+</resources>
