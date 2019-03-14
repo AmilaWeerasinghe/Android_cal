@@ -17,13 +17,14 @@ public class MainActivity extends AppCompatActivity {
  Button getButton;
 double x=0;
 int buttonCliked=0;
-double val=0;
 int FirstValEntered=0;
-
+double val;
+double y=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         idEditText=(EditText)findViewById(R.id.editTextNumber);
         addButton=(Button)findViewById(R.id.adderButton);
         subButton=(Button)findViewById(R.id.subtractorButton);
@@ -46,20 +47,27 @@ int FirstValEntered=0;
                         x=x+Num;
                         idEditText.setText(String.valueOf(x));
                         x = 0.0;
-                    }
+                    }}
                     else if(buttonCliked==2){
                         if(TextUtils.isEmpty((idEditText.getText().toString()))){
                          double Num=Double.parseDouble(idEditText.getText().toString());
                          val=val-Num;
                          idEditText.setText(String.valueOf(val));
-                         val=0.0;
+                         //val=0.0;
                         }
                     }
+                if(buttonCliked==3) {
+                    if (!TextUtils.isEmpty(idEditText.getText().toString())) {
+                        double Num=Double.parseDouble(idEditText.getText().toString());
+                        y=y*Num;
+                        idEditText.setText(String.valueOf(y));
+                        y= 0.0;
+                    }}
                     else{
                         idEditText.setText(String.valueOf(x));
                         x=0.0;
                     }
-                }
+
                          }
      });
 
@@ -68,6 +76,29 @@ int FirstValEntered=0;
             public void onClick(View v) {
                 if(!TextUtils.isEmpty(idEditText.getText().toString())) {
                     cal("+", idEditText.getText().toString());
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "No empty Number allowed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        divButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!TextUtils.isEmpty(idEditText.getText().toString())) {
+                    cal("/", idEditText.getText().toString());
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "No empty Number allowed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        mulButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!TextUtils.isEmpty(idEditText.getText().toString())) {
+                    cal("*", idEditText.getText().toString());
                 }
                 else{
                     Toast.makeText(MainActivity.this, "No empty Number allowed", Toast.LENGTH_SHORT).show();
@@ -98,6 +129,27 @@ if(type.equals("+")){
     idEditText.setText("");
 }
 
+
+        if(type.equals("/")){
+            buttonCliked=4;
+            double Number= Double.parseDouble(number);
+            x=x+Number;
+            Toast.makeText(this, String.valueOf(x), Toast.LENGTH_SHORT).show();
+            idEditText.setText("");
+        }
+
+
+
+
+
+        if(type.equals("*")){
+            buttonCliked=3;
+            double Number= Double.parseDouble(number);
+            y=y*Number;
+            Toast.makeText(this, String.valueOf(y), Toast.LENGTH_SHORT).show();
+            idEditText.setText("");
+        }
+
 if(type.equals("-") ){
     buttonCliked=2;
 
@@ -109,8 +161,8 @@ if(type.equals("-") ){
         idEditText.setText("");
     }
     if(FirstValEntered==1){
-        double Number=Double.parseDouble(number);
-        val=val-Number;
+        double Number2=Double.parseDouble(number);
+        val=val-Number2;
         Toast.makeText(this, String.valueOf(val), Toast.LENGTH_SHORT).show();
         idEditText.setText("");
 
